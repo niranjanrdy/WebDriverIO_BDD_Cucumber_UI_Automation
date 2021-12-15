@@ -36,7 +36,7 @@ In this repository we used `webdriverIO-v7.x` as a webdriver and libraries that 
 ## Getting Started
 Clone Repository
 ```bash
-1. git clone
+1. git clone https://github.com/niranjanrdy/WebDriverIO_BDD_Cucumber_UI_Automation.git
 ```
 
 Install the dependencies:
