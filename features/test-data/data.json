@@ -1,0 +1,16 @@
+{
+    "credentials":{
+    "UserName": "admin@phptravels.com",
+    "Password": "demoadmin"
+    },
+    "Add Customer":{
+    "firstName": "Otis",
+    "lastName": "Milburn",
+    "MobileNo": "0123456789",
+    "Address1": "Baltimore County",
+    "Address2": "United States"
+    },
+    "MainSettings":{
+        "Balance": "500"
+    }
+}
