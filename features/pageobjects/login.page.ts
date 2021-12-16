@@ -8,7 +8,7 @@ class LoginPage {
     get userNameElement() { return $("//input[@type='text']") }
     get passwordElement() { return $("//input[@placeholder='Password']") }
     get loginButtonElement() { return $("//button[@type='submit']") }
-    get adminDashboard() { return ("//i[@class='fa fa-desktop']/following-sibling::strong") }
+    get adminPageHeader() { return ("//h2[text()='Management Tools']") }
     async enterCredintials() {
         await this.userNameElement.setValue(Data.credentials.UserName);
         await this.passwordElement.setValue(Data.credentials.Password);

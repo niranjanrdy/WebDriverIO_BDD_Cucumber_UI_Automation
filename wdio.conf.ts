@@ -54,13 +54,13 @@ export const config: WebdriverIO.Config = {
         maxInstances: 5,
         browserName: 'chrome',
         acceptInsecureCerts: true
-    },
-    {
-         maxInstances: 2,
-         browserName: 'MicrosoftEdge',
-         acceptInsecureCerts: true
-
     }],
+    // {
+    //      maxInstances: 2,
+    //      browserName: 'MicrosoftEdge',
+    //      acceptInsecureCerts: true
+
+    // }],
     //
     // ===================
     // Test Configurations
@@ -130,11 +130,12 @@ export const config: WebdriverIO.Config = {
     // Test reporter for stdout.
     // The only one supported by default is 'dot'
     // see also: https://webdriver.io/docs/dot-reporter
-    reporters: ['spec', ['allure', {
+    reporters: ['spec',
+    ['allure', {
         outputDir: 'allure-results',
         disableWebdriverStepsReporting: true,
         disableWebdriverScreenshotsReporting: false,
-        useCucumberStepReporter:true
+        useCucumberStepReporter: true
     }]
     ],
 
@@ -260,23 +261,18 @@ export const config: WebdriverIO.Config = {
      * @param {number}             result.duration  duration of scenario in milliseconds
      * @param {Object}             context          Cucumber World object
      */
-    // afterStep: function (step, scenario, result, context) {
-    // },
-    /**
-     *
-     * Runs after a Cucumber Scenario.
+     afterStep: async function (step, scenario, result, context) {
+        if (!result.passed) {
+            await browser.takeScreenshot();
+        }
+    },
+    /** 
      * @param {ITestCaseHookParameter} world            world object containing information on pickle and test step
      * @param {Object}                 result           results object containing scenario results
      * @param {boolean}                result.passed    true if scenario has passed
      * @param {string}                 result.error     error stack if scenario failed
      * @param {number}                 result.duration  duration of scenario in milliseconds
-     * @param {Object}                 context          Cucumber World object
-     */
-    // afterScenario: function (world, result, context) {
-    // },
-    /**
-     *
-     * Runs after a Cucumber Feature.
+     * @param {Object}                 context          Cucumber World object.
      * @param {String}                   uri      path to feature file
      * @param {GherkinDocument.IFeature} feature  Cucumber feature object
      */
