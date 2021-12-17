@@ -3,7 +3,7 @@ Feature: Automate PHPTRAVELS Page
     Scenario: Login with a valid credentials
         Given I would be landing on "https://phptravels.net/api/admin"
         When I enter valid credentials and enter login
-        Then I should land on "DASHBOARD" page
+        Then I should land on "admin" page
     Scenario: Managing the customer details
         When I land on admin dashboard and click on customers
         Then I should land "customers" page
