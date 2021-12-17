@@ -8,7 +8,7 @@ class LoginPage {
     get userNameElement() { return $("//input[@type='text']") }
     get passwordElement() { return $("//input[@placeholder='Password']") }
     get loginButtonElement() { return $("//button[@type='submit']") }
-    get adminPageHeader() { return ("//h2[text()='Management Tools']") }
+    get adminPageHeader() { return ("//p[text()='DASHBOARD']") }
     async enterCredintials() {
         await this.userNameElement.setValue(Data.credentials.UserName);
         await this.passwordElement.setValue(Data.credentials.Password);
@@ -16,7 +16,7 @@ class LoginPage {
     async clickLoginButton() {
         await this.loginButtonElement.click()
     }
-    
+
 
 }
 export default new LoginPage()
