@@ -1,7 +1,6 @@
 import faker from "faker"
 
 class AdminPage{
-    //get customerElement(){ return $("//a[@href='https://phptravels.net/api/admin/accounts/customers/']//div")}
     get adminBtn(){return $("//*[@id='content']/div[2]/div[3]/div/div[1]/a/div")}
     async clickonAdminTab(){
         await this.adminBtn.click()
@@ -20,9 +19,6 @@ class AdminPage{
     get address2(){return $("//input[@name='address2']")}
     get balance(){return $("//input[@name='balance']")}
     get countryDropDown(){return $("//*[@id='select2-drop']/ul/li[4]/div/span")}
-    //get dropDown(){return $("//*[@id='select2-drop-mask']")}
-    //get selectDropDown(){return $(".select2-search")}
-    //get dropDown(){return $(".select2-search")}
     get submitBtn(){return $("//button[text()='Submit']")}
     get successMsg(){return $("//h4[@class='ui-pnotify-title']")}
     get dashboardBtn(){return $("//a[@href='https://phptravels.net/api/admin']")}

@@ -18,10 +18,7 @@ class CustomerPage{
     get address1(){return $("//input[@name='address1']")}
     get address2(){return $("//input[@name='address2']")}
     get balance(){return $("//input[@name='balance']")}
-    get dropDown(){return $("//*[@id='select2-drop']/ul/li[4]/div/span")}
-    //get dropDown(){return $("//*[@id='select2-drop-mask']")}
-    //get selectDropDown(){return $(".select2-search")}
-    //get dropDown(){return $(".select2-search")}
+    get dropDown(){return $("//span[text()='Please Select']")}
     get submitBtn(){return $("//button[text()='Submit']")}
     get successMsg(){return $("//h4[@class='ui-pnotify-title']")}
     get dashboardBtn(){return $("//a[@href='https://phptravels.net/api/admin']")}
@@ -37,17 +34,16 @@ class CustomerPage{
     async setPassword(password: string) {
             await this.password.setValue(password)
         }
-    async setAddress(customeraddress:{MobileNo:string,Address1:string, Address2:string}){
-        await this.mobileNo.setValue(customeraddress.MobileNo)
-        await this.address1.setValue(customeraddress.Address1)
-        await this.address1.setValue(customeraddress.Address1)
+    async setAddress(MobileNo:any,Address1:string, Address2:string){
+        await this.mobileNo.setValue(MobileNo)
+        await this.address1.setValue(Address1)
+        await this.address1.setValue(Address2)
+    }
+    async clickOnCountry(){
+        await this.dropDown.setValue("Algeria")
     }
     async setMainSettings(customermainSettings:{balance:string}){
         await this.balance.setValue(customermainSettings.balance)
-    }
-    async clickOnCountry(){
-        await this.dropDown.waitForClickable()
-        await this.dropDown.selectByVisibleText("Algeria")
     }
     async clickOnSubmitBtn(){
         await this.submitBtn.click()
