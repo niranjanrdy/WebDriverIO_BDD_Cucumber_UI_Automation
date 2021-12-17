@@ -11,7 +11,7 @@ class SupplierPage {
     get mobileNo() { return $("//input[@name='mobile']") }
     get address1() { return $("//input[@name='address1']") }
     get address2() { return $("//input[@name='address2']") }
-    get dropDown() { return $("//*[@id='select2-drop']/ul/li[4]/div/span") }
+    get dropDown() { return $("//span[text()='Please Select']") }
     get comission() { return $("//input[@name='commission']S") }
     get balance() { return $("//input[@name='balance']") }
     get addCars() { return $("//input[@value='addCars']") }
@@ -43,9 +43,17 @@ class SupplierPage {
     async setMobileNo() {
         await this.mobileNo.setValue(faker.phone.phoneNumber())
     }
-    async selectCountry() {
-        await this.dropDown.waitForClickable()
-        await this.dropDown.selectByVisibleText("Algeria")
+    get dropDownSearchBox(){return $(".select2-input")}
+    get allCountriesOption(){return $$(".select2-results>li>div")}
+    async clickOnCountry() {
+        await this.dropDown.click()
+        await this.dropDownSearchBox.setValue("India")
+        await this.allCountriesOption.forEach(async(option)=>{
+            const countryName=await option.getText()
+            if(countryName=="India"){
+                await option.click()
+            }
+        })
     }
     async setAddress() {
         await this.address1.setValue(faker.address.city())

@@ -12,8 +12,8 @@ When("I enter valid credentials and enter login", async () => {
     await LoginPage.enterCredintials()
     await LoginPage.clickLoginButton()
 })
-Then("I should land on {string} page", async (Text) => {
-    await expect(LoginPage.adminPageHeader).toHaveTextContaining(Text)
+Then("I should land on {string} page", async (urlElement) => {
+    await expect(browser).toHaveUrlContaining(urlElement)
 })
 When("I land on admin dashboard and click on customers", async () => {
     await CustomerPage.clickomCustomerTab()
@@ -28,6 +28,7 @@ When("I click on add customer and enter all required details", async () => {
     await CustomerPage.setPassword()
     await CustomerPage.setMobileNumber()
     await CustomerPage.clickOnCountry()
+    await browser.pause(5000)
     await CustomerPage.setAddress()
     await CustomerPage.setMainSettings(Data.customermainSettings)
     await CustomerPage.clickOnSubmitBtn()
@@ -40,9 +41,9 @@ Then("I should get the success msg {string}", async (headerText) => {
 When("I click on suppliers page", async () => {
     await suppliersPage.clickOnSuppliers()
 })
-Then("I should land on {string} page", async (headerText) => {
-    await expect(suppliersPage.pageHeader).toHaveTextContaining(headerText)
-})
+// Then("I should land on {string} page", async (headerText) => {
+//     await expect(suppliersPage.pageHeader).toHaveTextContaining(headerText)
+// })
 When("I click on add button to add new supplier", async () => {
     await suppliersPage.clickOnAddSupplier()
 })
@@ -51,7 +52,7 @@ When("I enter all the fields and checkboxes", async () => {
     await suppliersPage.emailAddress()
     await suppliersPage.setPassword()
     await suppliersPage.setMobileNo()
-    await suppliersPage.selectCountry()
+    await suppliersPage.clickOnCountry()
     await suppliersPage.setAddress()
     await suppliersPage.setMainSettings(Data.suppliermainSettings)
     await suppliersPage.assignHotelDropDown()
@@ -80,7 +81,7 @@ When(/^I enter all the fields$/, async () => {
     await adminsPage.emailAddress()
     await adminsPage.setPassword()
     await adminsPage.setMobileNo()
-    await adminsPage.clickForCountry()
+    await adminsPage.clickOnCountry()
     await adminsPage.setAddress()
     await adminsPage.setMainSettings(Data.adminmainSettings)
     await CustomerPage.clickOnSubmitBtn()

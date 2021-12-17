@@ -1,7 +1,7 @@
 import faker from "faker"
 
 class AdminPage {
-    get adminBtn() { return $("//*[@id='content']/div[2]/div[3]/div/div[1]/a/div") }
+    get adminBtn() { return $("//a[@href='https://phptravels.net/api/admin/accounts/admins/']/div") }
     async clickonAdminTab() {
         await this.adminBtn.click()
     }
@@ -15,10 +15,10 @@ class AdminPage {
     get email() { return $("//input[@name='email']") }
     get password() { return $("//input[@name='password']") }
     get mobileNo() { return $("//input[@name='mobile']") }
+    get dropDown() { return $("//span[text()='Please Select']") }
     get address1() { return $("//input[@name='address1']") }
     get address2() { return $("//input[@name='address2']") }
     get balance() { return $("//input[@name='balance']") }
-    get countryDropDown() { return $("//*[@id='select2-drop']/ul/li[4]/div/span") }
     get submitBtn() { return $("//button[text()='Submit']") }
     get successMsg() { return $("//h4[@class='ui-pnotify-title']") }
     get dashboardBtn() { return $("//a[@href='https://phptravels.net/api/admin']") }
@@ -37,9 +37,17 @@ class AdminPage {
     async setMobileNo() {
         await this.mobileNo.setValue(faker.phone.phoneNumber())
     }
-    async clickForCountry() {
-        await this.countryDropDown.waitForClickable()
-        await this.countryDropDown.selectByVisibleText("Algeria")
+    get dropDownSearchBox(){return $(".select2-input")}
+    get allCountriesOption(){return $$(".select2-results>li>div")}
+    async clickOnCountry() {
+        await this.dropDown.click()
+        await this.dropDownSearchBox.setValue("India")
+        await this.allCountriesOption.forEach(async(option)=>{
+            const countryName=await option.getText()
+            if(countryName=="India"){
+                await option.click()
+            }
+        })
     }
     async setAddress() {
         await this.address1.setValue(faker.address.city())
