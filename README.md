@@ -52,3 +52,10 @@ Generate allure report:
 ```
 npm run report (opens report in default browser)
 ```
+### Key Features
+- Complete Automation
+- Cucumber BDD framework
+- Plain and easy to understand feature file
+- Page object Model
+- Generates allure results on our default browser also attaches screenshot of any failure in tests
+- All the dependicies are in package.json file

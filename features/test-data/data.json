@@ -3,39 +3,12 @@
         "UserName": "admin@phptravels.com",
         "Password": "demoadmin"
     },
-    "customernames": {
-        "firstName": "Otis",
-        "lastName": "Milburn"
-    },
-    "customeraddress": {
-        "MobileNo": 1234567890,
-        "Address1": "Baltimore County",
-        "Address2": "United States"
-    },
     "customermainSettings": {
         "balance": "500"
-    },
-    "suppliernames": {
-        "firstName": "Maeve",
-        "lastName": "Wiley"
-    },
-    "supplieraddress": {
-        "MobileNo": "0125463789",
-        "Address1": "Florida",
-        "Address2": "United States"
     },
     "suppliermainSettings": {
         "comission": "15%",
         "balance": "1500"
-    },
-    "adminnames": {
-        "firstName": "Fred",
-        "lastName": "Andrews"
-    },
-    "adminaddress": {
-        "MobileNo": "0125463789",
-        "Address1": "Riverdale",
-        "Address2": "United States"
     },
     "adminmainSettings": {
         "balance": "900"
