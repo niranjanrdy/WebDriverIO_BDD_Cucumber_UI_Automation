@@ -1,4 +1,3 @@
-import faker from "faker"
 import Data from "../test-data/data.json"
 
 class AdminPage {
@@ -27,11 +26,6 @@ class AdminPage {
         await this.firstName.setValue(firstName)
         await this.lastName.setValue(lastName)
     }
-    async emailAddress() {
-        const email = faker.internet.email();
-        console.log(email);
-        await this.email.setValue(email);
-    }
     async setPassword(password:any) {
         await this.password.setValue(password)
     }
@@ -45,7 +39,7 @@ class AdminPage {
         await this.dropDownSearchBox.setValue(Data.adminCountry.setValue)
         await this.allCountriesOption.forEach(async(option)=>{
             const countryName=await option.getText()
-            if(countryName=="India"){
+            if(countryName==Data.adminCountry.setValue){
                 await option.click()
             }
         })
