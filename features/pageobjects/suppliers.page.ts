@@ -1,4 +1,5 @@
 import faker from "faker"
+import Data from "../test-data/data.json"
 
 class SupplierPage {
     get suppliers() { return $("//a[@href='https://phptravels.net/api/admin/accounts/suppliers/']//div") }
@@ -12,6 +13,7 @@ class SupplierPage {
     get address1() { return $("//input[@name='address1']") }
     get address2() { return $("//input[@name='address2']") }
     get dropDown() { return $("//span[text()='Please Select']") }
+    get itemName() {return $("//input[@name='itemname']")}
     get comission() { return $("//input[@name='commission']S") }
     get balance() { return $("//input[@name='balance']") }
     get addCars() { return $("//input[@value='addCars']") }
@@ -28,26 +30,26 @@ class SupplierPage {
     async clickOnAddSupplier() {
         this.addSupplier.click()
     }
-    async setFirstAndLastName() {
-        await this.firstName.setValue(faker.name.firstName())
-        await this.lastName.setValue(faker.name.lastName())
+    async setFirstAndLastName(firstName:any, lastName:any) {
+        await this.firstName.setValue(firstName)
+        await this.lastName.setValue(lastName)
     }
     async emailAddress() {
         const email = faker.internet.email();
         console.log(email);
         await this.email.setValue(email);
     }
-    async setPassword() {
-        await this.password.setValue(faker.internet.password(8))
+    async setPassword(password:any) {
+        await this.password.setValue(password)
     }
-    async setMobileNo() {
-        await this.mobileNo.setValue(faker.phone.phoneNumber())
+    async setMobileNo(phoneNumber:any) {
+        await this.mobileNo.setValue(phoneNumber)
     }
     get dropDownSearchBox(){return $(".select2-input")}
     get allCountriesOption(){return $$(".select2-results>li>div")}
     async clickOnCountry() {
         await this.dropDown.click()
-        await this.dropDownSearchBox.setValue("India")
+        await this.dropDownSearchBox.setValue(Data.supplierCountry.setValue)
         await this.allCountriesOption.forEach(async(option)=>{
             const countryName=await option.getText()
             if(countryName=="India"){
@@ -55,13 +57,14 @@ class SupplierPage {
             }
         })
     }
-    async setAddress() {
-        await this.address1.setValue(faker.address.city())
-        await this.address2.setValue(faker.address.state())
+    async setAddress(city:string, state:string) {
+        await this.address1.setValue(city)
+        await this.address2.setValue(state)
     }
-    async setMainSettings(suppliermainSettings: { comission: string, balance: string }) {
-        await this.comission.setValue(suppliermainSettings.comission)
-        await this.balance.setValue(suppliermainSettings.balance)
+    async setMainSettings(comission: string, balance: string) {
+        await this.comission.scrollIntoView()
+        await this.comission.setValue(comission)
+        await this.balance.setValue(balance)
     }
     async clickCarsCheckBox() {
         await this.addCars.click()
@@ -70,13 +73,13 @@ class SupplierPage {
         await this.addHotels.click()
     }
     async assignHotelDropDown() {
-        await this.assignHotel.selectByVisibleText("Malmaison Manchester")
+        await this.assignHotel.selectByVisibleText(Data.assignHotel)
     }
     async assignToursDropDown() {
-        await this.assignTours.selectByVisibleText("6 Days Around Thailand")
+        await this.assignTours.selectByVisibleText(Data.assignTours)
     }
     async assignCarsDropDown() {
-        await this.assignCars.selectByVisibleText("Ford Mondeo 2012")
+        await this.assignCars.selectByVisibleText(Data.assignCars)
     }
     async clickOnSubmitBtn() {
         await this.submitBtn.click()

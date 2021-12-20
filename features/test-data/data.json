@@ -12,5 +12,17 @@
     },
     "adminmainSettings": {
         "balance": "900"
-    }
+    },
+    "customerCountry":{
+        "setValue": "India"
+    },
+    "adminCountry":{
+        "setValue":"India"
+    },
+    "supplierCountry":{
+        "setValue":"India"
+    },
+    "assignHotel":"Malmaison Manchester",
+    "assignTours":"6 Days Around Thailand",
+    "assignCars":"Ford Mondeo 2012"
 }
