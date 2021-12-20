@@ -1,3 +1,7 @@
+//import folderUtils from "./features/utils/folderUtils";
+
+import { deleteDirectory } from "./features/utils/folderUtils";
+
 export const config: WebdriverIO.Config = {
     //
     // ====================
@@ -185,8 +189,9 @@ export const config: WebdriverIO.Config = {
      * @param {Object} config wdio configuration object
      * @param {Array.<Object>} capabilities list of capabilities details
      */
-    // onPrepare: function (config, capabilities) {
-    // },
+    onPrepare: function (config, capabilities) {
+        deleteDirectory("allure-results")
+    },
     /**
      * Gets executed before a worker process is spawned and can be used to initialise specific service
      * for that worker as well as modify runtime environments in an async fashion.
