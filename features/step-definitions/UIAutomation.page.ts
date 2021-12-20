@@ -16,6 +16,52 @@ When("I enter valid credentials and enter login", async () => {
 Then("I should land on {string} page", async (urlElement) => {
     await expect(browser).toHaveUrlContaining(urlElement)
 })
+When("I click on suppliers page", async () => {
+    await suppliersPage.clickOnSuppliers()
+})
+When("I click on add button to add new supplier", async () => {
+    await suppliersPage.clickOnAddSupplier()
+})
+When("I enter all the fields and checkboxes", async () => {
+    await suppliersPage.setFirstAndLastName(faker.name.firstName(), faker.name.lastName())
+    await suppliersPage.email.setValue(faker.internet.email())
+    await suppliersPage.setPassword(faker.internet.password())
+    await suppliersPage.setMobileNo(faker.phone.phoneNumber())
+    await suppliersPage.clickOnCountry(Data.supplierCountry)
+    await suppliersPage.setAddress(faker.address.city(), faker.address.state())
+    await suppliersPage.setItemName(faker.name.jobTitle())
+    await suppliersPage.setMainSettings(Data.suppliermainSettings.comission, Data.suppliermainSettings.balance)
+    await suppliersPage.clickCarsCheckBox()
+    await suppliersPage.clickHotelsCheckBox()
+    await suppliersPage.clickOnSubmitBtn()
+})
+Then("The success msg {string} will be prompted", async (text) => {
+    await suppliersPage.successMsg.waitForDisplayed()
+    await expect(suppliersPage.successMsg).toHaveTextContaining(text)
+    await suppliersPage.clickToRedirectDashboard()
+})
+When(/^I click on admin tab$/, async () => {
+    await adminsPage.clickonAdminTab()
+});
+When(/^I click on add admin button$/, async () => {
+    await adminsPage.clickOnAddAdminBtn()
+});
+When(/^I enter all the fields$/, async () => {
+    await adminsPage.setFirstAndLastName(faker.name.firstName(), faker.name.lastName())
+    await adminsPage.email.setValue(faker.internet.email())
+    await adminsPage.setPassword(faker.internet.password())
+    await adminsPage.setMobileNo(faker.phone.phoneNumber())
+    await adminsPage.clickOnCountry(Data.adminCountry)
+    await adminsPage.setAddress(faker.address.city(), faker.address.state())
+    await adminsPage.setMainSettings(Data.adminmainSettings.balance)
+    await adminsPage.clickOnSubmitBtn()
+
+});
+Then(/^Success messeage as \"([^\"]*)\" would be displayed$/, async (text) => {
+    await adminsPage.successMsg.waitForDisplayed()
+    await expect(adminsPage.successMsg).toHaveTextContaining(text)
+    await adminsPage.clickToRedirectDashboard()
+})
 When("I land on admin dashboard and click on customers", async () => {
     await CustomerPage.clickomCustomerTab()
 })
@@ -34,52 +80,4 @@ Then("I should get the success msg {string}", async (headerText) => {
     await CustomerPage.successMsg.waitForDisplayed()
     await expect(CustomerPage.successMsg).toHaveTextContaining(headerText)
     await CustomerPage.clickOnDashboard()
-})
-When(/^I click on admin tab$/, async () => {
-    await adminsPage.clickonAdminTab()
-});
-When(/^I click on add admin button$/, async () => {
-    await adminsPage.clickOnAddAdminBtn()
-});
-When(/^I enter all the fields$/, async () => {
-    await adminsPage.setFirstAndLastName(faker.name.firstName(), faker.name.lastName())
-    await adminsPage.email.setValue(faker.internet.email())
-    await adminsPage.setPassword(faker.internet.password())
-    await adminsPage.setMobileNo(faker.phone.phoneNumber())
-    await adminsPage.clickOnCountry(Data.adminCountry)
-    await adminsPage.setAddress(faker.address.city(), faker.address.state())
-    await adminsPage.setMainSettings(Data.adminmainSettings.balance)
-    await CustomerPage.clickOnSubmitBtn()
-
-});
-Then(/^Success messeage as \"([^\"]*)\" would be displayed$/, async (text) => {
-    await adminsPage.successMsg.waitForDisplayed()
-    await expect(adminsPage.successMsg).toHaveTextContaining(text)
-})
-When("I click on suppliers page", async () => {
-    await suppliersPage.clickOnSuppliers()
-})
-When("I click on add button to add new supplier", async () => {
-    await suppliersPage.clickOnAddSupplier()
-})
-When("I enter all the fields and checkboxes", async () => {
-    await suppliersPage.setFirstAndLastName(faker.name.firstName(),faker.name.lastName())
-    await suppliersPage.email.setValue(faker.internet.email())
-    await suppliersPage.setPassword(faker.internet.password())
-    await suppliersPage.setMobileNo(faker.phone.phoneNumber())
-    await suppliersPage.clickOnCountry(Data.supplierCountry)
-    await suppliersPage.setAddress(faker.address.city(), faker.address.state())
-    await suppliersPage.itemName.setValue(faker.name.jobTitle())
-    await suppliersPage.assignHotelDropDown(Data.assignHotel)
-    await suppliersPage.assignToursDropDown(Data.assignTours)
-    await suppliersPage.assignCarsDropDown(Data.assignCars)
-    await suppliersPage.setMainSettings(Data.suppliermainSettings.balance, Data.suppliermainSettings.comission)
-    await suppliersPage.clickCarsCheckBox()
-    await suppliersPage.clickHotelsCheckBox()
-    await suppliersPage.clickOnSubmitBtn()
-})
-Then("The success msg {string} will be prompted", async (text) => {
-    await suppliersPage.successMsg.waitForDisplayed()
-    await expect(suppliersPage.successMsg).toHaveTextContaining(text)
-    await suppliersPage.clickToRedirectDashboard()
 })
