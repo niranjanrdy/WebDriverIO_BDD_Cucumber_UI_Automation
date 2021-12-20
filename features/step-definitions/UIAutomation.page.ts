@@ -31,9 +31,8 @@ When("I click on add customer and enter all required details", async () => {
     await CustomerPage.clickOnSubmitBtn()
 })
 Then("I should get the success msg {string}", async (headerText) => {
-    await CustomerPage.successMsg.waitForDisplayed
+    await CustomerPage.successMsg.waitForDisplayed()
     await expect(CustomerPage.successMsg).toHaveTextContaining(headerText)
-    await browser.pause(3000)
     await CustomerPage.clickOnDashboard()
 })
 When("I click on suppliers page", async () => {
@@ -59,9 +58,8 @@ When("I enter all the fields and checkboxes", async () => {
     await suppliersPage.clickOnSubmitBtn()
 })
 Then("The success msg {string} will be prompted", async (text) => {
-    await suppliersPage.successMsg.waitForDisplayed
+    await suppliersPage.successMsg.waitForDisplayed()
     await expect(suppliersPage.successMsg).toHaveTextContaining(text)
-    await browser.pause(3000)
     await suppliersPage.clickToRedirectDashboard()
 })
 When(/^I click on admin tab$/, async () => {
@@ -82,6 +80,6 @@ When(/^I enter all the fields$/, async () => {
 
 });
 Then(/^Success messeage as \"([^\"]*)\" would be displayed$/, async (text) => {
-    await adminsPage.successMsg.waitForDisplayed
+    await adminsPage.successMsg.waitForDisplayed()
     await expect(adminsPage.successMsg).toHaveTextContaining(text)
 });
