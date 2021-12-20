@@ -1,4 +1,5 @@
 import Data from "../test-data/data.json"
+import report from "@wdio/allure-reporter"
 
 class SupplierPage {
     get suppliers() { return $("//a[@href='https://phptravels.net/api/admin/accounts/suppliers/']//div") }
@@ -25,61 +26,81 @@ class SupplierPage {
     get homeBtn() { return $("//a[@href='https://phptravels.net/api/admin']") }
     async clickOnSuppliers() {
         this.suppliers.click()
+        report.addStep(`performed click on : ${await this.suppliers.selector}`)
     }
     async clickOnAddSupplier() {
         this.addSupplier.click()
+        report.addStep(`performed click on : ${await this.addSupplier.selector}`)
     }
     async setFirstAndLastName(firstName:any, lastName:any) {
         await this.firstName.setValue(firstName)
+        report.addStep(`firstName set to : ${firstName}`)
         await this.lastName.setValue(lastName)
+        report.addStep(`lastName set to : ${lastName}`)
     }
     async setPassword(password:any) {
         await this.password.setValue(password)
+        report.addStep(`password is set to : ${password}`)
     }
     async setMobileNo(phoneNumber:any) {
         await this.mobileNo.setValue(phoneNumber)
+        report.addStep(`phoneNumber given as : ${phoneNumber}`)
     }
     get dropDownSearchBox(){return $(".select2-input")}
     get allCountriesOption(){return $$(".select2-results>li>div")}
-    async clickOnCountry() {
+    async clickOnCountry(supplierCountry: string) {
         await this.dropDown.click()
-        await this.dropDownSearchBox.setValue(Data.supplierCountry.setValue)
+        report.addStep(`performed click on : ${await this.dropDown.selector}`)
+        await this.dropDownSearchBox.setValue(supplierCountry)
+        report.addStep(`value is set to : ${supplierCountry}`)
         await this.allCountriesOption.forEach(async(option)=>{
             const countryName=await option.getText()
-            if(countryName==Data.supplierCountry.setValue){
+            if(countryName==supplierCountry){
                 await option.click()
             }
         })
     }
     async setAddress(city:string, state:string) {
         await this.address1.setValue(city)
+        report.addStep(`address city is set to : ${city}`)
         await this.address2.setValue(state)
+        report.addStep(`address state is set to : ${state}`)
     }
     async setMainSettings(comission: string, balance: string) {
         await this.comission.scrollIntoView()
         await this.comission.setValue(comission)
+        report.addStep(`comission is set to : ${comission}`)
         await this.balance.setValue(balance)
+        report.addStep(`balance is set to : ${balance}`)
     }
     async clickCarsCheckBox() {
         await this.addCars.click()
+        report.addStep(`performed click on : ${await this.addCars.selector}`)
     }
     async clickHotelsCheckBox() {
         await this.addHotels.click()
+        report.addStep(`performed click on : ${await this.addHotels.selector}`)
     }
-    async assignHotelDropDown() {
-        await this.assignHotel.selectByVisibleText(Data.assignHotel)
+    async assignHotelDropDown(assignHotel: string) {
+        await this.assignHotel.selectByVisibleText(assignHotel)
+        report.addStep(`selected the value : ${assignHotel}`)
+        
     }
-    async assignToursDropDown() {
-        await this.assignTours.selectByVisibleText(Data.assignTours)
+    async assignToursDropDown(assignTours: string) {
+        await this.assignTours.selectByVisibleText(assignTours)
+        report.addStep(`Slected the text : ${assignTours}`)
     }
-    async assignCarsDropDown() {
-        await this.assignCars.selectByVisibleText(Data.assignCars)
+    async assignCarsDropDown(assignCars: string) {
+        await this.assignCars.selectByVisibleText(assignCars)
+        report.addStep(`Slected the text : ${assignCars}`)
     }
     async clickOnSubmitBtn() {
         await this.submitBtn.click()
+        report.addStep(`performed click on : ${await this.submitBtn.selector}`)
     }
     async clickToRedirectDashboard() {
         await this.homeBtn.click()
+        report.addStep(`performed click on : ${await this.homeBtn.selector}`)
     }
 }
 export default new SupplierPage()
