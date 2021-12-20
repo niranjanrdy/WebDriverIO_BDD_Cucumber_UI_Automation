@@ -4,6 +4,7 @@ import LoginPage from "../pageobjects/login.page";
 import Data from "../test-data/data.json"
 import suppliersPage from "../pageobjects/suppliers.page";
 import adminsPage from "../pageobjects/admins.page";
+import faker from "faker"
 
 Given("I would be landing on {string}", async (url) => {
     await LoginPage.openPage(url);
@@ -18,46 +19,41 @@ Then("I should land on {string} page", async (urlElement) => {
 When("I land on admin dashboard and click on customers", async () => {
     await CustomerPage.clickomCustomerTab()
 })
-Then("I should land {string} page", async (urlElement) => {
-    await expect(browser).toHaveUrlContaining(urlElement)
-})
 When("I click on add customer and enter all required details", async () => {
     await CustomerPage.clickOnAddCustomerBtn()
-    await CustomerPage.setFirstAndLastName()
-    await CustomerPage.emailAddress()
-    await CustomerPage.setPassword()
-    await CustomerPage.setMobileNumber()
+    await CustomerPage.setFirstAndLastName(faker.name.firstName(), faker.name.lastName())
+    await CustomerPage.email.setValue(faker.internet.email())
+    await CustomerPage.setPassword(faker.internet.password())
+    await CustomerPage.setMobileNumber(faker.phone.phoneNumber)
     await CustomerPage.clickOnCountry()
-    await browser.pause(5000)
-    await CustomerPage.setAddress()
-    await CustomerPage.setMainSettings(Data.customermainSettings)
+    await CustomerPage.setAddress(faker.address.city(), faker.address.state())
+    await CustomerPage.setMainSettings(Data.customermainSettings.balance)
     await CustomerPage.clickOnSubmitBtn()
 })
 Then("I should get the success msg {string}", async (headerText) => {
     await CustomerPage.successMsg.waitForDisplayed
     await expect(CustomerPage.successMsg).toHaveTextContaining(headerText)
+    await browser.pause(3000)
     await CustomerPage.clickOnDashboard()
 })
 When("I click on suppliers page", async () => {
     await suppliersPage.clickOnSuppliers()
 })
-// Then("I should land on {string} page", async (headerText) => {
-//     await expect(suppliersPage.pageHeader).toHaveTextContaining(headerText)
-// })
 When("I click on add button to add new supplier", async () => {
     await suppliersPage.clickOnAddSupplier()
 })
 When("I enter all the fields and checkboxes", async () => {
-    await suppliersPage.setFirstAndLastName()
-    await suppliersPage.emailAddress()
-    await suppliersPage.setPassword()
-    await suppliersPage.setMobileNo()
+    await suppliersPage.setFirstAndLastName(faker.name.firstName(),faker.name.lastName())
+    await suppliersPage.email.setValue(faker.internet.email())
+    await suppliersPage.setPassword(faker.internet.password())
+    await suppliersPage.setMobileNo(faker.phone.phoneNumber())
     await suppliersPage.clickOnCountry()
-    await suppliersPage.setAddress()
-    await suppliersPage.setMainSettings(Data.suppliermainSettings)
+    await suppliersPage.setAddress(faker.address.city(), faker.address.state())
+    await suppliersPage.itemName.setValue(faker.name.jobTitle())
     await suppliersPage.assignHotelDropDown()
     await suppliersPage.assignToursDropDown()
     await suppliersPage.assignCarsDropDown()
+    await suppliersPage.setMainSettings(Data.suppliermainSettings.balance, Data.suppliermainSettings.comission)
     await suppliersPage.clickCarsCheckBox()
     await suppliersPage.clickHotelsCheckBox()
     await suppliersPage.clickOnSubmitBtn()
@@ -65,25 +61,23 @@ When("I enter all the fields and checkboxes", async () => {
 Then("The success msg {string} will be prompted", async (text) => {
     await suppliersPage.successMsg.waitForDisplayed
     await expect(suppliersPage.successMsg).toHaveTextContaining(text)
+    await browser.pause(3000)
     await suppliersPage.clickToRedirectDashboard()
 })
 When(/^I click on admin tab$/, async () => {
     await adminsPage.clickonAdminTab()
 });
-Then(/^I should land on \"([^\"]*)\"$/, async (text) => {
-    await expect(adminsPage.pageHeader).toHaveTextContaining(text)
-});
 When(/^I click on add admin button$/, async () => {
     await adminsPage.clickOnAddAdminBtn()
 });
 When(/^I enter all the fields$/, async () => {
-    await adminsPage.setFirstAndLastName()
-    await adminsPage.emailAddress()
-    await adminsPage.setPassword()
-    await adminsPage.setMobileNo()
+    await adminsPage.setFirstAndLastName(faker.name.firstName(), faker.name.lastName())
+    await adminsPage.email.setValue(faker.internet.email())
+    await adminsPage.setPassword(faker.internet.password())
+    await adminsPage.setMobileNo(faker.phone.phoneNumber())
     await adminsPage.clickOnCountry()
-    await adminsPage.setAddress()
-    await adminsPage.setMainSettings(Data.adminmainSettings)
+    await adminsPage.setAddress(faker.address.city(), faker.address.state())
+    await adminsPage.setMainSettings(Data.adminmainSettings.balance)
     await CustomerPage.clickOnSubmitBtn()
 
 });
