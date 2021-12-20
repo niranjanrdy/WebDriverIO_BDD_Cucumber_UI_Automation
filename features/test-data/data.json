@@ -7,7 +7,7 @@
         "balance": "500"
     },
     "suppliermainSettings": {
-        "comission": "15%",
+        "comission": "15",
         "balance": "1500"
     },
     "adminmainSettings": {
@@ -15,8 +15,5 @@
     },
     "customerCountry": "India",
     "adminCountry": "India",
-    "supplierCountry": "India",
-    "assignHotel":"Malmaison Manchester",
-    "assignTours":"6 Days Around Thailand",
-    "assignCars":"Ford Mondeo 2012"
+    "supplierCountry": "India"
 }

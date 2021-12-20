@@ -1,4 +1,3 @@
-import Data from "../test-data/data.json"
 import report from "@wdio/allure-reporter"
 
 class SupplierPage {
@@ -12,15 +11,11 @@ class SupplierPage {
     get mobileNo() { return $("//input[@name='mobile']") }
     get address1() { return $("//input[@name='address1']") }
     get address2() { return $("//input[@name='address2']") }
-    get dropDown() { return $("//span[text()='Please Select']") }
-    get itemName() {return $("//input[@name='itemname']")}
-    get comission() { return $("//input[@name='commission']S") }
+    get itemName() { return $("//input[@name='itemname']") }
+    get comission() { return $("//input[@name='commission']") }
     get balance() { return $("//input[@name='balance']") }
     get addCars() { return $("//input[@value='addCars']") }
     get addHotels() { return $("//input[@value='addHotels']") }
-    get assignHotel() { return $("//div[@id='s2id_autogen3']/ul") }
-    get assignTours() { return $("//div[@id='s2id_autogen5']/ul") }
-    get assignCars() { return $("//div[@id='s2id_autogen7']/ul") }
     get submitBtn() { return $("//button[text()='Submit']") }
     get successMsg() { return $("//h4[@class='ui-pnotify-title']") }
     get homeBtn() { return $("//a[@href='https://phptravels.net/api/admin']") }
@@ -32,39 +27,43 @@ class SupplierPage {
         this.addSupplier.click()
         report.addStep(`performed click on : ${await this.addSupplier.selector}`)
     }
-    async setFirstAndLastName(firstName:any, lastName:any) {
+    async setFirstAndLastName(firstName: any, lastName: any) {
         await this.firstName.setValue(firstName)
         report.addStep(`firstName set to : ${firstName}`)
         await this.lastName.setValue(lastName)
         report.addStep(`lastName set to : ${lastName}`)
     }
-    async setPassword(password:any) {
+    async setPassword(password: any) {
         await this.password.setValue(password)
         report.addStep(`password is set to : ${password}`)
     }
-    async setMobileNo(phoneNumber:any) {
+    async setMobileNo(phoneNumber: any) {
         await this.mobileNo.setValue(phoneNumber)
         report.addStep(`phoneNumber given as : ${phoneNumber}`)
     }
-    get dropDownSearchBox(){return $(".select2-input")}
-    get allCountriesOption(){return $$(".select2-results>li>div")}
+    get dropDown() { return $("//span[text()='Please Select']") }
+    get dropDownSearchBox() { return $(".select2-input") }
+    get allCountriesOption() { return $$(".select2-results>li>div") }
     async clickOnCountry(supplierCountry: string) {
         await this.dropDown.click()
         report.addStep(`performed click on : ${await this.dropDown.selector}`)
         await this.dropDownSearchBox.setValue(supplierCountry)
         report.addStep(`value is set to : ${supplierCountry}`)
-        await this.allCountriesOption.forEach(async(option)=>{
-            const countryName=await option.getText()
-            if(countryName==supplierCountry){
+        await this.allCountriesOption.forEach(async (option) => {
+            const countryName = await option.getText()
+            if (countryName == supplierCountry) {
                 await option.click()
             }
         })
     }
-    async setAddress(city:string, state:string) {
+    async setAddress(city: string, state: string) {
         await this.address1.setValue(city)
         report.addStep(`address city is set to : ${city}`)
         await this.address2.setValue(state)
         report.addStep(`address state is set to : ${state}`)
+    }
+    async setItemName(name: string) {
+        await this.itemName.setValue(name)
     }
     async setMainSettings(comission: string, balance: string) {
         await this.comission.scrollIntoView()
@@ -80,19 +79,6 @@ class SupplierPage {
     async clickHotelsCheckBox() {
         await this.addHotels.click()
         report.addStep(`performed click on : ${await this.addHotels.selector}`)
-    }
-    async assignHotelDropDown(assignHotel: string) {
-        await this.assignHotel.selectByVisibleText(assignHotel)
-        report.addStep(`selected the value : ${assignHotel}`)
-        
-    }
-    async assignToursDropDown(assignTours: string) {
-        await this.assignTours.selectByVisibleText(assignTours)
-        report.addStep(`Slected the text : ${assignTours}`)
-    }
-    async assignCarsDropDown(assignCars: string) {
-        await this.assignCars.selectByVisibleText(assignCars)
-        report.addStep(`Slected the text : ${assignCars}`)
     }
     async clickOnSubmitBtn() {
         await this.submitBtn.click()
